@@ -418,6 +418,60 @@
         background: #22c55e;
       }
 
+      /* [S6b] Help box styles */
+      .help-details {
+        margin: 6px 0 0;
+      }
+
+      .help-summary {
+        cursor: pointer;
+        font-size: 0.8rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: rgba(15, 23, 42, 0.85);
+        color: var(--muted);
+      }
+
+      body.theme-light .help-summary {
+        background: rgba(243, 244, 246, 0.95);
+      }
+
+      .help-summary::before {
+        content: "❓";
+        font-size: 0.9rem;
+      }
+
+      .help-details[open] .help-summary {
+        border-color: var(--accent);
+        color: var(--accent);
+        background: var(--accent-soft);
+      }
+
+      .help-content {
+        margin-top: 8px;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      .help-content strong {
+        color: var(--text);
+        font-weight: 500;
+      }
+
+      .help-content ol {
+        margin: 6px 0 0;
+        padding-left: 18px;
+      }
+
+      .help-content li {
+        margin-bottom: 4px;
+      }
+
       @media (max-width: 760px) {
         body {
           padding: 12px;
@@ -571,6 +625,59 @@
           </div>
         </section>
       </div>
+
+      <div class="sections">
+      
+      </div>
+
+      <!-- [S10b] How to use LockPad -->
+      <section class="section full">
+        <details class="help-details">
+          <summary class="help-summary">
+            How to use LockPad (super simple)
+          </summary>
+          <div class="help-content">
+            <p><strong>Think of keys like this:</strong></p>
+            <ul>
+              <li><strong>Public key</strong> = lock you give to others.</li>
+              <li><strong>Private key</strong> = secret key you keep.</li>
+              <li><strong>Passphrase</strong> = password that protects your secret key.</li>
+            </ul>
+
+            <p><strong>1. Get ready (do this once)</strong></p>
+            <ol>
+              <li>Type a secret password in <em>Key passphrase</em>.</li>
+              <li>Click <em>Generate keypair</em>.</li>
+              <li>Save your <strong>PUBLIC key</strong> (you can share this).</li>
+              <li>Save your <strong>PRIVATE key</strong> in a safe place (never share this).</li>
+              <li>Remember your <strong>passphrase</strong>.</li>
+            </ol>
+
+            <p><strong>2. Send a secret message to someone</strong></p>
+            <ol>
+              <li>Ask them for <strong>their PUBLIC key</strong>.</li>
+              <li>Paste their public key into the <em>Your PUBLIC key</em> box.</li>
+              <li>Write your message in <em>Plaintext message</em>.</li>
+              <li>Click <em>Encrypt</em>.</li>
+              <li>Copy the <strong>encrypted block</strong> and send it to them (email, chat, etc.).</li>
+            </ol>
+
+            <p><strong>3. Read a secret message from someone</strong></p>
+            <ol>
+              <li>Make sure your <strong>PRIVATE key</strong> is in the private key box.</li>
+              <li>Type your <strong>passphrase</strong> in <em>Key passphrase</em>.</li>
+              <li>Paste the <strong>encrypted block</strong> you received into the decrypt box.</li>
+              <li>Click <em>Decrypt</em>.</li>
+              <li>Read your message in <em>Decrypted plaintext</em>.</li>
+            </ol>
+
+            <p><strong>Local only:</strong> all encryption/decryption happens in your browser. No accounts, no server logs.</p>
+          </div>
+        </details>
+      </section>
+
+      <!-- [S11] Status bar -->
+      <div class="status" id="statusBar">
 
       <!-- [S11] Status bar -->
       <div class="status" id="statusBar">
@@ -800,4 +907,3 @@
     </script>
   </body>
 </html>
-
