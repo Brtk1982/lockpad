@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- [S1] Basic HTML structure + styles -->
 <!DOCTYPE html>
 <html lang="en">
@@ -907,3 +908,360 @@
     </script>
   </body>
 </html>
+=======
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LockPad</title>
+<style>
+
+  :root {
+    --bg1: #0a0a0a;
+    --bg2: #003030;
+    --bg3: #006666;
+    --fg: #f5f5f5;
+    --accent: #00d1b2;
+    --font: "Montserrat", sans-serif;
+  }
+
+  
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    background:
+      radial-gradient(circle at 25% 25%, rgba(0, 200, 200, 0.18) 0%, transparent 55%),
+      radial-gradient(circle at 75% 75%, rgba(0, 150, 200, 0.15) 0%, transparent 60%),
+      radial-gradient(circle at 60% 40%, rgba(255, 255, 255, 0.06) 0%, transparent 70%),
+      linear-gradient(135deg, #000000, #0a0a0a, #1b1b1b, #2f2f2f, #3f3f3f);
+    background-size: 300% 300%;
+    animation: rippleFlow 14s ease-in-out infinite;
+    color: #f5f5f5;
+    font-family: "Montserrat", sans-serif;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .screen {
+    width: 90%;
+    max-width: 900px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  button {
+    padding: 0.8rem 2.3rem;
+    border-radius: 10px;
+    font-size: 1.05rem;
+  }
+
+  .field-box, textarea {
+    width: 100%;
+    max-width: 700px;
+    min-height: 55px;
+    border-radius: 10px;
+    margin: 0 auto 1rem auto;
+    display: block;
+    text-align: center;
+    font-size: 0.95rem;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  @keyframes rippleFlow {
+    0% { background-position: 0% 50%, 100% 50%, 50% 50%, 0% 50%; }
+    50% { background-position: 50% 0%, 50% 100%, 40% 60%, 100% 50%; }
+    100% { background-position: 0% 50%, 100% 50%, 50% 50%, 0% 50%; }
+  }
+
+  h1 {
+    font-weight: 600;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    background: linear-gradient(90deg, #00ffd5, #00bfa5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(0, 209, 178, 0.3);
+  }
+
+  .screen {
+    width: 90%;
+    max-width: 900px;
+    display: none;
+  }
+
+  .screen.active {
+    display: block;
+    animation: fadeIn 0.6s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  button {
+    background: transparent;
+    color: var(--fg);
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  button:hover {
+    background: linear-gradient(90deg, #00bfa5, #00ffd5);
+    color: #0a0a0a;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 0 20px rgba(0, 209, 178, 0.5);
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .field-label {
+    font-weight: 600;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 0.4rem;
+  }
+
+  .field-box, textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 209, 178, 0.3);
+    border-radius: 10px;
+    color: var(--fg);
+    padding: 0.7rem 1rem;
+    text-align: center;
+    width: 100%;
+    max-width: 700px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  textarea {
+    resize: none;
+    min-height: 70px;
+  }
+
+  .copy-btn {
+    background: linear-gradient(90deg, #00bfa5, #00ffd5);
+    border: none;
+    color: #0a0a0a;
+    padding: 0.2rem 0.6rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    transition: box-shadow 0.3s, transform 0.2s;
+  }
+
+  .copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(0, 209, 178, 0.6);
+  }
+
+  #main .buttons button {
+    width: 220px;
+    height: 55px;
+    border-radius: 10px;
+    font-size: 1.05rem;
+  }
+
+  #key .copy-btn {
+    display: block;
+    margin: 0.5rem auto 1.5rem auto;
+  }
+
+  #encrypt button:not(.copy-btn),
+  #decrypt button:not(.copy-btn) {
+    margin-bottom: 1.8rem;
+  }
+
+  .copy-btn {
+    width: auto;
+    padding: 0.25rem 0.6rem;
+    min-width: unset;
+    text-align: center;
+  }
+/* Limit key field height and make them scrollable */
+#pubkey, #privkey {
+  max-height: 180px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 209, 178, 0.3);
+  border-radius: 10px;
+  padding: 0.7rem 1rem;
+  color: var(--fg);
+}
+#key button:nth-of-type(1) {
+  margin-bottom: 1.5rem;
+}
+
+</style>
+</head>
+
+<body>
+<!-- Main Screen -->
+<div id="main" class="screen active">
+  <h1>l o c k p a d</h1>
+  <div class="buttons">
+    <button onclick="showScreen('key')">Generate Key Pair</button>
+    <button onclick="showScreen('encrypt')">Encrypt</button>
+    <button onclick="showScreen('decrypt')">Decrypt</button>
+  </div>
+</div>
+
+<!-- Key Screen -->
+<div id="key" class="screen">
+  <h1>Generated Keys</h1>
+  <div class="field-label">Passphrase</div>
+  <input type="password" id="passphrase" class="field-box" />
+  <div class="field-label">Public Key</div>
+  <div class="field-box" id="pubkey"></div>
+  <button class="copy-btn" onclick="copy('pubkey')">Copy</button>
+  <div class="field-label">Private Key</div>
+  <div class="field-box" id="privkey"></div>
+  <button class="copy-btn" onclick="copy('privkey')">Copy</button>
+  <div><button onclick="generateKeypair()">Generate</button></div>
+  <div><button onclick="showScreen('main')">Back</button></div>
+</div>
+
+<!-- Encrypt Screen -->
+<div id="encrypt" class="screen">
+  <h1>Encrypt Message</h1>
+  <div class="field-label">Recipient’s Public Key</div>
+  <textarea id="encPubKey"></textarea>
+  <div class="field-label">Message</div>
+  <textarea id="plainText"></textarea>
+  <div><button onclick="encryptMessage()">Encrypt</button></div>
+  <div class="field-label">Encrypted Output</div>
+  <textarea id="cipherText" readonly></textarea>
+  <button class="copy-btn" onclick="copy('cipherText')">Copy</button>
+  <div><button onclick="showScreen('main')">Back</button></div>
+</div>
+
+<!-- Decrypt Screen -->
+<div id="decrypt" class="screen">
+  <h1>Decrypt Message</h1>
+  <div class="field-label">Your Private Key</div>
+  <textarea id="decPrivKey"></textarea>
+  <div class="field-label">Passphrase</div>
+  <input type="password" id="decPass" class="field-box" />
+  <div class="field-label">Encrypted Message</div>
+  <textarea id="cipherInput"></textarea>
+  <div><button onclick="decryptMessage()">Decrypt</button></div>
+  <div class="field-label">Decrypted Output</div>
+  <textarea id="plainOutput" readonly></textarea>
+  <button class="copy-btn" onclick="copy('plainOutput')">Copy</button>
+  <div><button onclick="showScreen('main')">Back</button></div>
+</div>
+
+<!-- OpenPGP -->
+<script src="https://unpkg.com/openpgp@6.1.1/dist/openpgp.min.js"></script>
+
+<script>
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function copy(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.value || el.innerText);
+}
+
+// === Key Generation ===
+async function generateKeypair() {
+  const passphraseField = document.getElementById("passphrase");
+  const passphrase = passphraseField ? passphraseField.value.trim() : "";
+
+  console.log("Generate button clicked. Passphrase:", passphrase);
+
+  if (!passphrase) {
+    alert("⚠️ Please enter a passphrase before generating your key pair.");
+    return;
+  }
+
+  try {
+    const { privateKey, publicKey } = await openpgp.generateKey({
+      type: "rsa",
+      rsaBits: 4096,
+      userIDs: [{ name: "LockPad User", email: "" }],
+      passphrase
+    });
+    document.getElementById("pubkey").innerText = publicKey;
+    document.getElementById("privkey").innerText = privateKey;
+  } catch (err) {
+    console.error("Key generation error:", err);
+  }
+}
+
+
+// === Encryption ===
+async function encryptMessage() {
+  const publicKeyArmored = document.getElementById("encPubKey").value.trim();
+  const messageText = document.getElementById("plainText").value.trim();
+  if (!publicKeyArmored || !messageText) return;
+  try {
+    const message = await openpgp.createMessage({ text: messageText });
+    const publicKey = await openpgp.readKey({ armoredKey: publicKeyArmored });
+    const encrypted = await openpgp.encrypt({
+      message,
+      encryptionKeys: publicKey
+    });
+    document.getElementById("cipherText").value = encrypted;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// === Decryption ===
+async function decryptMessage() {
+  const privateKeyArmored = document.getElementById("decPrivKey").value.trim();
+  const passphrase = document.getElementById("decPass").value.trim();
+  const armoredMessage = document.getElementById("cipherInput").value.trim();
+  if (!privateKeyArmored || !passphrase || !armoredMessage) return;
+  try {
+    const privateKeyObj = await openpgp.readPrivateKey({ armoredKey: privateKeyArmored });
+    const decryptionKey = await openpgp.decryptKey({
+      privateKey: privateKeyObj,
+      passphrase
+    });
+    const message = await openpgp.readMessage({ armoredMessage });
+    const { data: decrypted } = await openpgp.decrypt({
+      message,
+      decryptionKeys: decryptionKey
+    });
+    document.getElementById("plainOutput").value = decrypted;
+  } catch (err) {
+    console.error(err);
+  }
+}
+</script>
+</body>
+</html>
+
+
+
+>>>>>>> 6f6cec3 (Replace lockpad.html with new index.html (LockPad v2.0 UI + full encryption))
