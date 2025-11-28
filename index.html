@@ -26,19 +26,23 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      background:
-        radial-gradient(circle at 25% 25%, rgba(0, 200, 200, 0.18) 0%, transparent 55%),
-        radial-gradient(circle at 75% 75%, rgba(0, 150, 200, 0.15) 0%, transparent 60%),
-        radial-gradient(circle at 60% 40%, rgba(255, 255, 255, 0.06) 0%, transparent 70%),
-        linear-gradient(135deg, #000000, #0a0a0a, #1b1b1b, #2f2f2f, #3f3f3f);
-      background-size: 300% 300%;
-      animation: rippleFlow 14s ease-in-out infinite;
-      color: #f5f5f5;
-      font-family: "Montserrat", sans-serif;
-    }
+html, body {
+  height: 100%;
+  margin: 0;
+  background:
+    /* brighter, tighter glows */
+    radial-gradient(circle at 20% 20%, rgba(0, 255, 200, 0.28) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(0, 140, 255, 0.30) 0%, transparent 45%),
+    radial-gradient(circle at 60% 30%, rgba(0, 255, 120, 0.22) 0%, transparent 50%),
+    /* darker base gradient */
+    linear-gradient(135deg, #000000, #020408, #020b11, #00141c, #000000);
+  background-size: 350% 350%;           /* bigger movement range */
+  animation: rippleFlow 12s ease-in-out infinite;  /* faster than 14s */
+  color: #f5f5f5;
+  font-family: "Montserrat", sans-serif;
+}
+
+
 
     body {
       display: flex;
@@ -346,26 +350,29 @@ textarea {
       navigator.clipboard.writeText(el.value || el.innerText);
     }
 
-    // === Key Generation ===
-    async function generateKeypair() {
-      const passphrase = document.getElementById("passphrase").value.trim();
-      if (!passphrase) {
-        alert("Please enter a passphrase before generating your key pair.");
-        return;
-      }
-      try {
-        const { privateKey, publicKey } = await openpgp.generateKey({
-          type: "rsa",
-          rsaBits: 4096,
-          userIDs: [{ name: "LockPad User", email: "" }],
-          passphrase
-        });
-        document.getElementById("pubkey").innerText = publicKey;
-        document.getElementById("privkey").innerText = privateKey;
-      } catch (err) {
-        console.error(err);
-      }
-    }
+   // === Key Generation (ECC: curve25519) ===
+async function generateKeypair() {
+  const passphrase = document.getElementById("passphrase").value.trim();
+  if (!passphrase) {
+    alert("Please enter a passphrase before generating your key pair.");
+    return;
+  }
+  try {
+    const { privateKey, publicKey } = await openpgp.generateKey({
+      type: "ecc",                // 🔁 was "rsa"
+      curve: "curve25519",        // compact, modern curve
+      userIDs: [{ name: "LockPad User", email: "" }],
+      passphrase
+    });
+
+    document.getElementById("pubkey").innerText = publicKey;
+    document.getElementById("privkey").innerText = privateKey;
+  } catch (err) {
+    console.error(err);
+    alert("Key generation failed. Check the console for details.");
+  }
+}
+
 
     // === Encryption ===
     async function encryptMessage() {
