@@ -261,19 +261,220 @@ textarea {
         max-width: 100%;
       }
     }
+/* === Intro Modal === */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(0, 255, 200, 0.08) 0%, transparent 40%),
+              radial-gradient(circle at 80% 20%, rgba(0, 255, 150, 0.10) 0%, transparent 45%),
+              rgba(0, 0, 0, 0.82);
+  display: none; /* will be set to flex via JS */
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(8px);
+}
+
+.modal {
+  width: 90%;
+  max-width: 720px;
+  background: linear-gradient(145deg, #020608, #020c11, #001922);
+  border: 1px solid rgba(0, 209, 178, 0.45);
+  border-radius: 18px;
+  padding: 1.5rem 1.75rem 1.25rem;
+  box-shadow: 0 0 40px rgba(0, 209, 178, 0.55);
+  animation: modalIn 0.4s ease-out;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.modal-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #00ffd5, #00bfa5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  color: var(--fg);
+  font-size: 1.3rem;
+  cursor: pointer;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.modal-close:hover {
+  background: rgba(0, 209, 178, 0.18);
+  transform: translateY(-1px);
+}
+
+.modal-section-title {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin: 0.9rem 0 0.35rem 0;
+}
+
+.modal-text {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #e4f8f6;
+  opacity: 0.9;
+}
+
+.modal-bullets {
+  font-size: 0.83rem;
+  line-height: 1.4;
+  margin: 0.25rem 0 0.4rem 0;
+  padding-left: 1.0rem;
+  color: #e4f8f6;
+  opacity: 0.9;
+}
+
+.modal-footer {
+  margin-top: 1.1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.modal-primary,
+.modal-secondary {
+  border-radius: 999px;
+  padding: 0.5rem 1.4rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--fg);
+  transition: all 0.2s ease;
+}
+
+.modal-primary {
+  background: linear-gradient(90deg, #00bfa5, #00ffd5);
+  color: #020909;
+  border: none;
+}
+
+.modal-primary:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 0 18px rgba(0, 209, 178, 0.7);
+}
+
+.modal-secondary:hover {
+  background: rgba(0, 209, 178, 0.14);
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .modal {
+    padding: 1.25rem 1.1rem 1rem;
+  }
+  .modal-title {
+    font-size: 1.1rem;
+  }
+}
+.info-link {
+  margin-top: 2.8rem;   /* drop it nicely below the buttons */
+  font-size: 0.8rem;
+  text-align: center;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(0, 209, 178, 0.75);
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.info-link:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
   </style>
 </head>
 
 <body>
-  <!-- Main Screen -->
-  <div id="main" class="screen active">
-    <h1>l o c k p a d</h1>
-    <div class="buttons">
-      <button onclick="showScreen('key')">Generate Key Pair</button>
-      <button onclick="showScreen('encrypt')">Encrypt</button>
-      <button onclick="showScreen('decrypt')">Decrypt</button>
+<!-- Intro Modal -->
+<div id="introModal" class="modal-backdrop">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">LockPad: Local-Only Encryption</div>
+      <button class="modal-close" onclick="closeIntroModal()" aria-label="Close">×</button>
+    </div>
+
+    <p class="modal-text">
+      LockPad is a tiny, local-only encryption pad. No accounts, no cloud, no tracking.
+      Your keys and messages live in your browser, or not at all.
+    </p>
+
+    <div class="modal-section-title">How it works</div>
+    <ul class="modal-bullets">
+      <li><strong>Generate</strong> an ECC key pair with a strong passphrase.</li>
+      <li><strong>Share</strong> only your public key with people who should send you messages.</li>
+      <li><strong>Encrypt / Decrypt</strong> text entirely in your browser – nothing is sent to any server.</li>
+    </ul>
+
+    <div class="modal-section-title">What it is not</div>
+    <ul class="modal-bullets">
+      <li>No cloud backup: if you don’t save your keys yourself, they disappear with the tab.</li>
+      <li>No recovery: lose your private key or passphrase, and your messages stay locked forever.</li>
+    </ul>
+
+    <div class="modal-section-title">Who built this</div>
+    <p class="modal-text">
+      Built by Bartek as part of a small collection of privacy-first tools for people
+      who don’t want their secrets living on random servers.
+    </p>
+
+    <div class="modal-footer">
+      <button class="modal-secondary" onclick="closeIntroModal(true)">
+        Don’t show again
+      </button>
+      <button class="modal-primary" onclick="closeIntroModal()">
+        Got it, take me in
+      </button>
     </div>
   </div>
+</div>
+
+  <!-- Main Screen -->
+<div id="main" class="screen active">
+  <h1>l o c k p a d</h1>
+  <div class="buttons">
+    <button onclick="showScreen('key')">Generate Key Pair</button>
+    <button onclick="showScreen('encrypt')">Encrypt</button>
+    <button onclick="showScreen('decrypt')">Decrypt</button>
+  </div>
+
+  <div class="info-link" onclick="openIntroModal()">
+    about • how it works
+  </div>
+</div>
+
 
   <!-- Key Screen -->
   <div id="key" class="screen">
@@ -414,6 +615,41 @@ async function generateKeypair() {
         console.error(err);
       }
     }
+// === Intro Modal Logic ===
+function openIntroModal() {
+  const modal = document.getElementById('introModal');
+  if (modal) {
+    modal.style.display = 'flex';
+  }
+}
+
+function closeIntroModal(dontShowAgain = false) {
+  const modal = document.getElementById('introModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+  if (dontShowAgain) {
+    try {
+      localStorage.setItem('lockpad_intro_seen', '1');
+    } catch (e) {
+      console.warn('Could not access localStorage for intro flag', e);
+    }
+  }
+}
+
+// Show on first load only
+document.addEventListener('DOMContentLoaded', () => {
+  let seen = false;
+  try {
+    seen = localStorage.getItem('lockpad_intro_seen') === '1';
+  } catch (e) {
+    seen = false;
+  }
+  if (!seen) {
+    openIntroModal();
+  }
+});
+
   </script>
 </body>
 </html>
