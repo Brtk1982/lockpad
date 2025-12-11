@@ -82,6 +82,15 @@ html, body {
   text-align: center;
 }
 
+.trust-line {
+  font-size: 0.9rem;
+  text-align: center;
+  max-width: 480px;
+  margin: 0 auto 2.2rem auto;
+  color: rgba(245, 245, 245, 0.78);
+  line-height: 1.5;
+}
+
 
     .screen.active {
       display: block;
@@ -293,6 +302,16 @@ textarea {
   margin-bottom: 0.75rem;
 }
 
+.modal-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.modal-link:hover {
+  text-decoration: underline;
+}
+
 .modal-title {
   font-size: 1.3rem;
   font-weight: 600;
@@ -445,11 +464,22 @@ textarea {
       <li>No recovery: lose your private key or passphrase, and your messages stay locked forever.</li>
     </ul>
 
-    <div class="modal-section-title">Who built this</div>
-    <p class="modal-text">
-      Built by Bartek as part of a small collection of privacy-first tools for people
-      who don’t want their secrets living on random servers.
-    </p>
+   <div class="modal-section-title">Who built this</div>
+<p class="modal-text">
+  Built by Bartek as part of a small collection of privacy-first tools for people
+  who don’t want their secrets living on random servers.
+  <br /><br />
+  Contact:
+  <a href="mailto:contact@microfixhub.com" class="modal-link">
+    contact@microfixhub.com
+  </a>
+  <br />
+  GitHub:
+  <a href="https://github.com/Brtk1982/lockpad" class="modal-link">
+    https://github.com/Brtk1982/lockpad
+  </a>
+</p>
+
 
     <div class="modal-footer">
       <button class="modal-secondary" onclick="closeIntroModal(true)">
@@ -465,6 +495,11 @@ textarea {
   <!-- Main Screen -->
 <div id="main" class="screen active">
   <h1>l o c k p a d</h1>
+
+  <p class="trust-line">
+    Everything stays in your browser. No accounts. No servers.
+  </p>
+
   <div class="buttons">
     <button onclick="showScreen('key')">Generate Key Pair</button>
     <button onclick="showScreen('encrypt')">Encrypt</button>
@@ -475,6 +510,7 @@ textarea {
     about • how it works
   </div>
 </div>
+
 
 
   <!-- Key Screen -->
