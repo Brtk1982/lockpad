@@ -417,8 +417,9 @@ textarea {
   }
 }
 .info-link {
-  margin-top: 2.8rem;   /* drop it nicely below the buttons */
-  font-size: 0.8rem;
+  margin-top: 2.8rem;
+  margin-bottom: 0.8rem;  /* extra space below this line */
+  font-size: 1.0rem;
   text-align: center;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -428,9 +429,29 @@ textarea {
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
+
 .info-link:hover {
   opacity: 1;
   transform: translateY(-1px);
+}
+.support-line {
+  margin-top: 1.8rem;   /* space ABOVE the support line */
+  font-size: 0.78rem;
+  text-align: center;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(245, 245, 245, 0.55);
+  opacity: 0.9;
+}
+
+.support-link {
+  color: #ffffff;          /* 🤍 make the link white */
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.support-link:hover {
+  text-decoration: underline;
 }
 
   </style>
@@ -509,7 +530,20 @@ textarea {
   <div class="info-link" onclick="openIntroModal()">
     about • how it works
   </div>
+
+  <div class="support-line">
+    like it? support it:
+    <a
+      href="https://buymeacoffee.com/zerodata"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="support-link"
+    >
+      buy me a coffee
+    </a>
+  </div>
 </div>
+
 
 
 
